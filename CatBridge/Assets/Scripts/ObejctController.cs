@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class ObejctController : MonoBehaviour
 {
+   
+    public DestroyObject[] movementObjects;
 
-    public GameObject[] MovementControllers;
-    private DestroyObject destroyObject;
-    
     void Start()
     {
-        destroyObject = FindObjectOfType<DestroyObject>();
+        //destroyObject = FindObjectOfType<DestroyObject>();
     }
+
+
 
     public void DeActivate()
     {
-        for (int i = 0; i < MovementControllers.Length; i++)
+
+        for (int i = 0; i < movementObjects.Length; i++)
         {
-            if(MovementControllers[i].destroyObject.activated == true)
+            if(movementObjects[i].activated)
             {
-                MovementControllers[i].SetActive = false;
+                movementObjects[i].DeActivatedCheck();
             }
-
         }
-
     }
 
+    public void ReActivate()
+    {
+        for (int i = 0; i < movementObjects.Length; i++)
+        {
+            if(movementObjects[i].activated)
+            {
+                movementObjects[i].ReActivatedCheck();
+                movementObjects[i].activated = false;
+            }
+        }
+    }
 
 
 }

@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject startPosition;
 
+    public float movementKind;
     public float moveSpeed;
+
     public float jumpForce;
     public float RighterMoveSpeed;
     public float LefterMoveSpeed;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D myCollider;
 
     private DestroyObject destroyObject;
+    private ObejctController obejctController;
 
     public bool grounded;
     public LayerMask whatIsGround;
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     public bool leftered;
     public LayerMask whatisLefter;
+    public float lefteredTimer = 1f;
+    public float leftTimer;
 
     public bool rightered;
     public LayerMask whatisRighter;
@@ -43,29 +48,36 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RighterMoveSpeed = moveSpeed * 2;
-        LefterMoveSpeed = moveSpeed * -2;
-        downerMoveSpeed = jumpForce * -1;
         myRigidbody = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
         destroyObject = FindObjectOfType<DestroyObject>();
-        myRigidbody.velocity = new Vector2(moveSpeed,myRigidbody.velocity.y);
+        obejctController = FindObjectOfType<ObejctController>();
+        
+        this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
+
+        RighterMoveSpeed = moveSpeed * 3;
+        LefterMoveSpeed = moveSpeed * -2;
+        downerMoveSpeed = jumpForce * -1;
+        movementKind = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rightTimer += Time.deltaTime;
-        if(rightTimer > righteredTimer) //activated가 되면
-        {
-            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
-        }
-
         grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
         jumpered = Physics2D.IsTouchingLayers(myCollider, whatisJumper);
         downered = Physics2D.IsTouchingLayers(myCollider, whatisDowner);
         leftered = Physics2D.IsTouchingLayers(myCollider, whatisLefter);
         rightered = Physics2D.IsTouchingLayers(myCollider, whatisRighter);
+
+        if(grounded && movementKind == 0)
+        {
+            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        }
+
+
+
+
 
         //myRigidbody.velocity = new Vector2(moveSpeed,myRigidbody.velocity.y);
 
@@ -81,43 +93,71 @@ public class PlayerController : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
             Debug.Log("Jumping");
+            obejctController.DeActivate();
         }
         
         if(downered)
         {
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, downerMoveSpeed);
-            Debug.Log("Downing");
-
+            // myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, downerMoveSpeed);
+            // Debug.Log("Downing");
+            // obejctController.DeActivate();
         }   
 
         if(leftered)
         {
-            if (destroyObject.activated == false)
-            {
-                myRigidbody.velocity = new Vector2(LefterMoveSpeed, myRigidbody.velocity.y);
-                Debug.Log("Lefting");
-            }                 
+            movementKind = 1;
+            movementControl();
+            Debug.Log("Lefting");
+            leftTimer = 0;
+            obejctController.DeActivate();   
         }        
+        leftTimer += Time.deltaTime;
+        if(leftTimer > lefteredTimer && movementKind != 2) //activated가 되면 1초뒤 원래로
+        {
+            movementKind = 0;
+        }
         
         if(rightered)
         {
-            if (destroyObject.activated == false)
-            {
-                myRigidbody.velocity = new Vector2(RighterMoveSpeed, myRigidbody.velocity.y);
-                Debug.Log("Righting");
-                rightTimer = 0;
-            }
-
-             
-
+            movementKind = 2;
+            movementControl();            
+            Debug.Log("Righting");
+            rightTimer = 0;
+            obejctController.DeActivate();         
+        }
+        rightTimer += Time.deltaTime;
+        if(rightTimer > righteredTimer && movementKind != 1) //activated가 되면 1초뒤 원래로
+        {
+            movementKind = 0;
         }
 
     }
 
+
+
+    void movementControl()
+    {
+        if(movementKind == 1) //left
+        {
+            myRigidbody.velocity = new Vector2(LefterMoveSpeed, myRigidbody.velocity.y);
+        } else if (movementKind == 2) //right
+        {
+            myRigidbody.velocity = new Vector2(RighterMoveSpeed, myRigidbody.velocity.y);
+        } else if (movementKind == 0) //grounded
+        {
+            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        } 
+
+    }
+
+
+
+
     public void ResetPlayer() 
     {
-        this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y, startPosition.transform.position.z);
-        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
+        movementKind = 0;
+        obejctController.ReActivate();
     }
 
 

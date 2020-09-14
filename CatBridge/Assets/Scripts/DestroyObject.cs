@@ -19,16 +19,21 @@ public class DestroyObject : MonoBehaviour
 
     public void Update() {
         playered = Physics2D.IsTouchingLayers(myCollider, whatIsPlayer);
-        activatedCheck();
-    }
-
-
-    public void activatedCheck()
-    {
         if(playered)
         {
             activated = true;
         }
+    }
+
+
+    public void DeActivatedCheck()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ReActivatedCheck()
+    {
+        gameObject.SetActive(true);
     }
 
 }
