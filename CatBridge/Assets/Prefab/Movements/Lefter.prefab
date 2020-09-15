@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4490745514753903240}
   - component: {fileID: 4490745514753903241}
   - component: {fileID: 7241210433317409832}
+  - component: {fileID: 2824280992494459768}
   m_Layer: 13
   m_Name: Lefter
   m_TagString: Untagged
@@ -117,3 +118,15 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &2824280992494459768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490745514753903243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94a5e6858074124e84dbb6e10388dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

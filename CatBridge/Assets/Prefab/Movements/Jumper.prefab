@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 209733975784427206}
   - component: {fileID: 209733975784427207}
   - component: {fileID: 6491381541443617529}
+  - component: {fileID: 4862409303554930200}
   m_Layer: 10
   m_Name: Jumper
   m_TagString: Untagged
@@ -117,3 +118,15 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &4862409303554930200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209733975784427064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94a5e6858074124e84dbb6e10388dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
