@@ -17,7 +17,7 @@ public class ObjectMovement : MonoBehaviour
             Vector3 mousePos;
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
+            this.gameObject.transform.localPosition = new Vector3((int)(mousePos.x - startPosX), (int)(mousePos.y - startPosY), 0);
         }
     }
 
@@ -41,8 +41,6 @@ public class ObjectMovement : MonoBehaviour
 
     private void OnMouseUp() 
     {
-        
-
         isBeingHeld = false;
         Debug.Log("NOT HELD");
     }

@@ -193,9 +193,8 @@ public class PlayerController : MonoBehaviour
         movementKind = 0;
         obejctController.ReActivate();
         Time.timeScale = 1;
-        
-        objectMaker.SetActiveAllChildren(objectMaker.PrefabHolder, true);
-        
+        objectMaker.SetActiveAllChildren(objectMaker.movementHolder, true);
+     
     }
 
     public void HardResetPlayer() 
@@ -216,9 +215,17 @@ public class PlayerController : MonoBehaviour
         lefttimeup();
         righteredTimer = 2.9f;
         righttimeup();
-        objectMaker.SetActiveAllChildren(objectMaker.PrefabHolder, true);
-
+        objectMaker.SetActiveAllChildren(objectMaker.movementHolder, true);
     }
+
+    public void ResetMap()
+    {
+        objectMaker.DestroyAllChildren(objectMaker.movementHolder);
+        objectMaker.DestroyAllChildren(objectMaker.platformHolder);
+        objectMaker.MakeMovements();
+        objectMaker.MakePlatforms();
+    }
+
 
 
     public void player()

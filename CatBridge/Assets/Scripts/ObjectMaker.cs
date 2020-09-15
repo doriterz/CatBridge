@@ -10,11 +10,12 @@ public class ObjectMaker : MonoBehaviour
     public GameObject[] movementObjects;
     public GameObject platformPositions;
     public GameObject movementObjectsPostitions;
-    public Transform PrefabHolder;
+    public Transform movementHolder;
+    public Transform platformHolder;
 
-    public int requiredPlatforms = 7;
-    public int requiredMovements = 3;
-    public int howmanyNeeded = 8;
+    public int requiredPlatforms;
+    public int requiredMovements;
+    public int howmanyNeeded;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,7 @@ public class ObjectMaker : MonoBehaviour
             for (int j = 0; j < howmanyNeeded; j++)
             {
             GameObject movements = Instantiate(movementObjects[i], new Vector3(movementObjectsPostitions.transform.position.x + (i*3), movementObjectsPostitions.transform.position.y, movementObjectsPostitions.transform.position.z), Quaternion.identity);
-            movements.transform.SetParent(PrefabHolder.transform);
+            movements.transform.SetParent(movementHolder.transform);
             movements.name = "movements" + i + " No." + j;                
             }
         }  
@@ -46,7 +47,7 @@ public class ObjectMaker : MonoBehaviour
             for (int j = 0; j < howmanyNeeded; j++)
             {
             GameObject platform = Instantiate(platformObjects[i], new Vector3(platformPositions.transform.position.x + (i*3), platformPositions.transform.position.y, platformPositions.transform.position.z), Quaternion.identity);
-            platform.transform.SetParent(PrefabHolder.transform);
+            platform.transform.SetParent(platformHolder.transform);
             platform.name = "platform" + i + " No." + j;                
 
             }
@@ -62,7 +63,28 @@ public class ObjectMaker : MonoBehaviour
         }
     }
 
+    public void DestroyAllChildren(Transform transform)
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
+    public void moveAllChildren(Transform transform)
+    {
+        foreach(Transform child in transform)
+        {
+            child.gameObject.transform.position = new Vector3 (child.gameObject.transform.position.x - 3, child.gameObject.transform.position.y, child.gameObject.transform.position.z);
+
+            if(child.gameObject.transform.position.x < platformPositions.transform.position.x)
+            {
+                child.gameObject.transform.position = new Vector3 (platformPositions.transform.position.x + (requiredPlatforms*3), child.gameObject.transform.position.y, child.gameObject.transform.position.z);
+            }
+
+
+        }
+    }
 
 
 }
