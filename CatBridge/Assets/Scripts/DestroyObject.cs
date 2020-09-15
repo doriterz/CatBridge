@@ -11,10 +11,10 @@ public class DestroyObject : MonoBehaviour
 
     private Collider2D myCollider;
 
-
     void Start()
     {
         myCollider = GetComponent<Collider2D>();
+
     }
 
     public void Update() {
@@ -22,18 +22,8 @@ public class DestroyObject : MonoBehaviour
         if(playered)
         {
             activated = true;
+            gameObject.SetActive(false);
+            
         }
     }
-
-
-    public void DeActivatedCheck()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void ReActivatedCheck()
-    {
-        gameObject.SetActive(true);
-    }
-
 }

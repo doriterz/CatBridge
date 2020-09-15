@@ -1,19 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject startPosition;
 
     public float movementKind;
-    public float moveSpeed;
 
+    public float moveSpeed;
     public float jumpForce;
     public float RighterMoveSpeed;
     public float LefterMoveSpeed;
     public float downerMoveSpeed;
     
+    public Text playerSpeedText;
+    public Text leftSpeedText;
+    public Text rightSpeedText;
+    public Text jumpForceText;
+    public Text lefttimeText;
+    public Text righttimeText;
 
 
     private Rigidbody2D myRigidbody;
@@ -21,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private DestroyObject destroyObject;
     private ObejctController obejctController;
+    private ObjectMaker objectMaker;
 
     public bool grounded;
     public LayerMask whatIsGround;
@@ -33,12 +41,12 @@ public class PlayerController : MonoBehaviour
 
     public bool leftered;
     public LayerMask whatisLefter;
-    public float lefteredTimer = 1f;
+    public float lefteredTimer = 3f;
     public float leftTimer;
 
     public bool rightered;
     public LayerMask whatisRighter;
-    public float righteredTimer = 1f;
+    public float righteredTimer = 3f;
     public float rightTimer;
     
     public bool killLine;
@@ -53,13 +61,27 @@ public class PlayerController : MonoBehaviour
         myCollider = GetComponent<Collider2D>();
         destroyObject = FindObjectOfType<DestroyObject>();
         obejctController = FindObjectOfType<ObejctController>();
+        objectMaker = FindObjectOfType<ObjectMaker>();
         
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
 
-        RighterMoveSpeed = moveSpeed * 3;
-        LefterMoveSpeed = moveSpeed * -2;
-        downerMoveSpeed = jumpForce * -1;
-        movementKind = 0;
+        moveSpeed = 4.9f;
+        player();
+        LefterMoveSpeed = -9.9f;
+        left();
+        RighterMoveSpeed = 14.9f;
+        right();
+        jumpForce = 9.9f;
+        jump();
+        lefteredTimer = 2.9f;
+        lefttimeup();
+        righteredTimer = 2.9f;
+        righttimeup();
+
+        // RighterMoveSpeed = moveSpeed * 3;
+        // LefterMoveSpeed = moveSpeed * -2;
+        // downerMoveSpeed = jumpForce * -1;
+        // movementKind = 0;
     }
 
     // Update is called once per frame
@@ -95,7 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
             Debug.Log("Jumping");
-            obejctController.DeActivate();
+            //destroyObject.DeActivatedCheck();
         }
         
         if(downered)
@@ -111,7 +133,7 @@ public class PlayerController : MonoBehaviour
             //movementControl();
             Debug.Log("Lefting");
             leftTimer = 0;
-            obejctController.DeActivate();   
+            //destroyObject.DeActivatedCheck();
         }        
         leftTimer += Time.deltaTime;
         if(leftTimer > lefteredTimer && movementKind != 2) //activated가 되면 1초뒤 원래로
@@ -125,7 +147,7 @@ public class PlayerController : MonoBehaviour
             //movementControl();            
             Debug.Log("Righting");
             rightTimer = 0;
-            obejctController.DeActivate();         
+            //destroyObject.DeActivatedCheck();
         }
         rightTimer += Time.deltaTime;
         if(rightTimer > righteredTimer && movementKind != 1) //activated가 되면 1초뒤 원래로
@@ -170,11 +192,105 @@ public class PlayerController : MonoBehaviour
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
         movementKind = 0;
         obejctController.ReActivate();
+        Time.timeScale = 1;
+        
+        objectMaker.SetActiveAllChildren(objectMaker.PrefabHolder, true);
+        
+    }
+
+    public void HardResetPlayer() 
+    {
+        this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
+        movementKind = 0;
+        obejctController.ReActivate();
+        Time.timeScale = 1;
+        moveSpeed = 4.9f;
+        player();
+        LefterMoveSpeed = -9.9f;
+        left();
+        RighterMoveSpeed = 14.9f;
+        right();
+        jumpForce = 9.9f;
+        jump();
+        lefteredTimer = 2.9f;
+        lefttimeup();
+        righteredTimer = 2.9f;
+        righttimeup();
+        objectMaker.SetActiveAllChildren(objectMaker.PrefabHolder, true);
+
     }
 
 
+    public void player()
+    {
+        moveSpeed += 0.1f;
+        playerSpeedText.text = "PlayerSpeed" + moveSpeed.ToString("F1");
+    }
+    public void playerminus()
+    {
+        moveSpeed -= 0.1f;
+        playerSpeedText.text = "PlayerSpeed" + moveSpeed.ToString("F1");
+    }
+    public void left()
+    {
+        LefterMoveSpeed -= 0.1f;
+        leftSpeedText.text = "LSpeed" + LefterMoveSpeed.ToString("F1");
+    }    
+    public void leftminus()
+    {
+        LefterMoveSpeed += 0.1f;
+        leftSpeedText.text = "LSpeed" + LefterMoveSpeed.ToString("F1");
+    }  
+    public void right()
+    {
+        RighterMoveSpeed += 0.1f;
+        rightSpeedText.text = "RSpeed" + RighterMoveSpeed.ToString("F1");
+    }    
+    public void rightminus()
+    {
+        RighterMoveSpeed -= 0.1f;
+        rightSpeedText.text = "RSpeed" + RighterMoveSpeed.ToString("F1");
+    } 
+    public void jump()
+    {
+        jumpForce += 0.1f;
+        jumpForceText.text = "JForce" + jumpForce.ToString("F1");
+    }
+    public void jumpminus()
+    {
+        jumpForce -= 0.1f;
+        jumpForceText.text = "JForce" + jumpForce.ToString("F1");
+    }
+    public void lefttimeup()
+    {
+        lefteredTimer += 0.1f;
+        lefttimeText.text = "LTime" + lefteredTimer.ToString("F1");
+    }
+    public void lefttimeminus()
+    {
+        lefteredTimer -= 0.1f;
+        lefttimeText.text = "LTime" + lefteredTimer.ToString("F1");
+    }
+        public void righttimeup()
+    {
+        righteredTimer += 0.1f;
+        righttimeText.text = "RTime" + righteredTimer.ToString("F1");
+    }
+    public void righttimeminus()
+    {
+        righteredTimer -= 0.1f;
+        righttimeText.text = "RTime" + righteredTimer.ToString("F1");
+    }
     public void ResetButton()
     {
         ResetPlayer();      
     }
+
+    public void pause()
+    {
+        Time.timeScale = 0;
+    }
+
+
+
 }

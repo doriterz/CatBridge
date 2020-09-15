@@ -5,11 +5,15 @@ using UnityEngine;
 public class ObejctController : MonoBehaviour
 {
    
-    public DestroyObject[] movementObjects;
+    private ObjectMaker objectMaker;
 
+    public DestroyObject[] movementObjects;
+    public GameObject[] PrefabObjects;
     void Start()
     {
         //destroyObject = FindObjectOfType<DestroyObject>();
+        objectMaker = FindObjectOfType<ObjectMaker>();
+
     }
 
 
@@ -17,25 +21,22 @@ public class ObejctController : MonoBehaviour
     public void DeActivate()
     {
 
-        for (int i = 0; i < movementObjects.Length; i++)
-        {
-            if(movementObjects[i].activated)
-            {
-                movementObjects[i].DeActivatedCheck();
-            }
-        }
+    //     for (int i = 0; i < movementObjects.Length; i++)
+    //     {
+    //         if(movementObjects[i].activated)
+    //         {
+    //             //movementObjects[i].DeActivatedCheck();
+    //             PrefabObjects[i].SetActive(false);
+    //         }
+    //     }
     }
 
     public void ReActivate()
     {
-        for (int i = 0; i < movementObjects.Length; i++)
-        {
-            if(movementObjects[i].activated)
-            {
-                movementObjects[i].ReActivatedCheck();
-                movementObjects[i].activated = false;
-            }
-        }
+        // for (int i = 0; i < length; i++)
+        // {
+            
+        // }
     }
 
 
