@@ -2590,7 +2590,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5247,6 +5247,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 209733975784427205, guid: 0a4a1baa6e02c564882e9d276fda2ac2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 209733975784427205, guid: 0a4a1baa6e02c564882e9d276fda2ac2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a4a1baa6e02c564882e9d276fda2ac2, type: 3}
 --- !u!1001 &2547417716949795659
@@ -5303,6 +5311,14 @@ PrefabInstance:
     - target: {fileID: 2547417716163602383, guid: b488c3165ed271a42b0de4d6e950b6ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547417716163602383, guid: b488c3165ed271a42b0de4d6e950b6ad, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547417716163602383, guid: b488c3165ed271a42b0de4d6e950b6ad, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b488c3165ed271a42b0de4d6e950b6ad, type: 3}
@@ -5451,6 +5467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {fileID: 0}
+  movementKind: 0
   moveSpeed: 5
   jumpForce: 15
   RighterMoveSpeed: 0
@@ -5472,6 +5489,8 @@ MonoBehaviour:
   whatisLefter:
     serializedVersion: 2
     m_Bits: 8192
+  lefteredTimer: 1
+  leftTimer: 0
   rightered: 0
   whatisRighter:
     serializedVersion: 2
@@ -5529,6 +5548,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4490745514753903242, guid: 6e2a868d1067c5c418458493187279bc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490745514753903242, guid: 6e2a868d1067c5c418458493187279bc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4490745514753903243, guid: 6e2a868d1067c5c418458493187279bc, type: 3}
       propertyPath: m_Name
       value: Lefter
@@ -5585,6 +5612,14 @@ PrefabInstance:
     - target: {fileID: 4812912214832678681, guid: 87aaa12a4b686584fa800c3c3c7920b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812912214832678681, guid: 87aaa12a4b686584fa800c3c3c7920b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812912214832678681, guid: 87aaa12a4b686584fa800c3c3c7920b9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4812912214832678682, guid: 87aaa12a4b686584fa800c3c3c7920b9, type: 3}
       propertyPath: m_Name

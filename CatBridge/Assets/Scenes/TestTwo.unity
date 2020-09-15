@@ -220,11 +220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6632328172555793012, guid: df0f872ad8595b844bed21306d0d7d35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 6632328172555793012, guid: df0f872ad8595b844bed21306d0d7d35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 6632328172555793012, guid: df0f872ad8595b844bed21306d0d7d35, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1885,6 +1885,10 @@ MonoBehaviour:
     m_Bits: 4096
   righteredTimer: 1
   rightTimer: 0
+  killLine: 0
+  whatIsKillLine:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!4 &4009936409156834900
 Transform:
   m_ObjectHideFlags: 0

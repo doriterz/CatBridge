@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
     public float righteredTimer = 1f;
     public float rightTimer;
     
-
+    public bool killLine;
+    public LayerMask whatIsKillLine;
 
     
 
@@ -69,14 +70,15 @@ public class PlayerController : MonoBehaviour
         downered = Physics2D.IsTouchingLayers(myCollider, whatisDowner);
         leftered = Physics2D.IsTouchingLayers(myCollider, whatisLefter);
         rightered = Physics2D.IsTouchingLayers(myCollider, whatisRighter);
+        killLine = Physics2D.IsTouchingLayers(myCollider, whatIsKillLine);
 
-        if(grounded && movementKind == 0)
-        {
-            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
-        }
+        // if(grounded && movementKind == 0)
+        // {
+        //     myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        // }
 
 
-
+        movementControl();
 
 
         //myRigidbody.velocity = new Vector2(moveSpeed,myRigidbody.velocity.y);
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour
         if(leftered)
         {
             movementKind = 1;
-            movementControl();
+            //movementControl();
             Debug.Log("Lefting");
             leftTimer = 0;
             obejctController.DeActivate();   
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour
         if(rightered)
         {
             movementKind = 2;
-            movementControl();            
+            //movementControl();            
             Debug.Log("Righting");
             rightTimer = 0;
             obejctController.DeActivate();         
@@ -130,6 +132,16 @@ public class PlayerController : MonoBehaviour
         {
             movementKind = 0;
         }
+
+        
+
+        if(killLine)
+        {
+            ResetPlayer();
+        }
+
+
+
 
     }
 
