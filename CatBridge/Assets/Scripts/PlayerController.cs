@@ -26,9 +26,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Collider2D myCollider;
 
+    private AtkEagleController atkEagleController;
+    private AtkObjectController atkObjectController;
     private DestroyObject destroyObject;
     private ObejctController obejctController;
     private ObjectMaker objectMaker;
+    private HealthBar healthBar;
 
     public bool grounded;
     public LayerMask whatIsGround;
@@ -52,7 +55,13 @@ public class PlayerController : MonoBehaviour
     public bool killLine;
     public LayerMask whatIsKillLine;
 
-    
+    public bool AtkBall;
+    public LayerMask whatIsAtkBall;
+
+    public bool EagleTrigger;
+    public LayerMask whatIsEagleTrigger;
+    public bool Eagle;
+    public LayerMask whatIsEagle;    
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +71,9 @@ public class PlayerController : MonoBehaviour
         destroyObject = FindObjectOfType<DestroyObject>();
         obejctController = FindObjectOfType<ObejctController>();
         objectMaker = FindObjectOfType<ObjectMaker>();
+        atkObjectController = FindObjectOfType<AtkObjectController>();
+        atkEagleController = FindObjectOfType<AtkEagleController>();
+        healthBar = FindObjectOfType<HealthBar>();
         
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
 
@@ -93,6 +105,9 @@ public class PlayerController : MonoBehaviour
         leftered = Physics2D.IsTouchingLayers(myCollider, whatisLefter);
         rightered = Physics2D.IsTouchingLayers(myCollider, whatisRighter);
         killLine = Physics2D.IsTouchingLayers(myCollider, whatIsKillLine);
+        AtkBall = Physics2D.IsTouchingLayers(myCollider, whatIsAtkBall);
+        EagleTrigger = Physics2D.IsTouchingLayers(myCollider, whatIsEagleTrigger);
+        Eagle = Physics2D.IsTouchingLayers(myCollider, whatIsEagle);
 
         // if(grounded && movementKind == 0)
         // {
@@ -163,6 +178,39 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        if(AtkBall)
+        {
+            if(healthBar.current <= 0)
+            {
+                Debug.Log("player Dead");
+                ResetPlayer();
+                healthBar.current = 100;
+            }
+        }
+
+
+        if(EagleTrigger)
+        {
+            atkEagleController.eagleActivator = true;
+        }    
+
+        if(Eagle)
+        {
+            atkEagleController.eagleLanded = false;
+            if(!atkEagleController.eagleLanded)
+            {
+                healthBar.damage = 50;
+                healthBar.Health();
+            }
+            atkEagleController.eagleLanded = true;
+            if(healthBar.current <= 0)
+            {
+                Debug.Log("player Dead");
+                ResetPlayer();
+                healthBar.current = 100;
+            }
+        }
+
 
 
     }
@@ -191,7 +239,6 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
         movementKind = 0;
-        obejctController.ReActivate();
         Time.timeScale = 1;
         objectMaker.SetActiveAllChildren(objectMaker.movementHolder, true);
      
@@ -201,7 +248,6 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
         movementKind = 0;
-        obejctController.ReActivate();
         Time.timeScale = 1;
         moveSpeed = 4.9f;
         player();

@@ -9,9 +9,11 @@ public class ObjectMaker : MonoBehaviour
     public GameObject[] platformObjects;
     public GameObject[] movementObjects;
     public GameObject platformPositions;
-    public GameObject movementObjectsPostitions;
+    public GameObject movementObjectsPostitions;    
+
     public Transform movementHolder;
     public Transform platformHolder;
+    
 
     public int requiredPlatforms;
     public int requiredMovements;
@@ -54,6 +56,23 @@ public class ObjectMaker : MonoBehaviour
         } 
     }
 
+    // public void MakeAtkBall()
+    // {        
+    //     for (int i = 0; i < requiredPlatforms; i++)
+    //     {
+    //         for (int j = 0; j < howmanyNeeded; j++)
+    //         {
+    //         GameObject platform = Instantiate(platformObjects[i], new Vector3(platformPositions.transform.position.x + (i*3), platformPositions.transform.position.y, platformPositions.transform.position.z), Quaternion.identity);
+    //         platform.transform.SetParent(platformHolder.transform);
+    //         platform.name = "platform" + i + " No." + j;                
+
+    //         }
+    //     } 
+    // }
+
+
+
+
     public void SetActiveAllChildren(Transform transform, bool value)
     {
         foreach (Transform child in transform)
@@ -85,6 +104,21 @@ public class ObjectMaker : MonoBehaviour
 
         }
     }
+
+    public void SetActiveChangeUnusedObjects(Transform transform, bool value)
+    {
+        foreach (Transform child in transform)
+        {
+            if(child.gameObject.transform.position.y < -2)
+            {
+                child.gameObject.SetActive(value);
+                SetActiveChangeUnusedObjects(child, value);
+            }
+        }
+    }
+
+
+
 
 
 }

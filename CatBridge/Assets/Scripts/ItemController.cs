@@ -36,14 +36,14 @@ public class ItemController : MonoBehaviour
     {
         if(objectSwitch)
         {
-            objectMaker.SetActiveAllChildren(objectMaker.platformHolder, false);
-            objectMaker.SetActiveAllChildren(objectMaker.movementHolder, true);
+            objectMaker.SetActiveChangeUnusedObjects(objectMaker.platformHolder, false);
+            objectMaker.SetActiveChangeUnusedObjects(objectMaker.movementHolder, true);
             objectSwitch = false;
             objectSwitcherText.text = "To\n Platforms";
         } else
         {
-            objectMaker.SetActiveAllChildren(objectMaker.movementHolder, false);
-            objectMaker.SetActiveAllChildren(objectMaker.platformHolder, true);
+            objectMaker.SetActiveChangeUnusedObjects(objectMaker.movementHolder, false);
+            objectMaker.SetActiveChangeUnusedObjects(objectMaker.platformHolder, true);
             objectSwitch = true;
             objectSwitcherText.text = "To\n Movements";           
         }

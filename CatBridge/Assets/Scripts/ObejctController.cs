@@ -6,9 +6,10 @@ public class ObejctController : MonoBehaviour
 {
    
     private ObjectMaker objectMaker;
-
     public DestroyObject[] movementObjects;
     public GameObject[] PrefabObjects;
+
+    
     void Start()
     {
         //destroyObject = FindObjectOfType<DestroyObject>();

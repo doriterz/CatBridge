@@ -18,6 +18,7 @@ public class ObjectMovement : MonoBehaviour
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
             this.gameObject.transform.localPosition = new Vector3((int)(mousePos.x - startPosX), (int)(mousePos.y - startPosY), 0);
+            
         }
     }
 
