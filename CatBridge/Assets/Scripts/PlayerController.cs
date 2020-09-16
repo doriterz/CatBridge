@@ -77,17 +77,17 @@ public class PlayerController : MonoBehaviour
         
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
 
-        moveSpeed = 4.9f;
+        moveSpeed = 2.9f;
         player();
-        LefterMoveSpeed = -9.9f;
+        LefterMoveSpeed = -14.9f;
         left();
         RighterMoveSpeed = 14.9f;
         right();
         jumpForce = 9.9f;
         jump();
-        lefteredTimer = 2.9f;
+        lefteredTimer = 0.3f;
         lefttimeup();
-        righteredTimer = 2.9f;
+        righteredTimer = 0.3f;
         righttimeup();
 
         // RighterMoveSpeed = moveSpeed * 3;
@@ -249,17 +249,17 @@ public class PlayerController : MonoBehaviour
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
         movementKind = 0;
         Time.timeScale = 1;
-        moveSpeed = 4.9f;
+        moveSpeed = 2.9f;
         player();
-        LefterMoveSpeed = -9.9f;
+        LefterMoveSpeed = -14.9f;
         left();
         RighterMoveSpeed = 14.9f;
         right();
         jumpForce = 9.9f;
         jump();
-        lefteredTimer = 2.9f;
+        lefteredTimer = 0.3f;
         lefttimeup();
-        righteredTimer = 2.9f;
+        righteredTimer = 0.3f;
         righttimeup();
         objectMaker.SetActiveAllChildren(objectMaker.movementHolder, true);
     }
