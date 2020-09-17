@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private ObejctController obejctController;
     private ObjectMaker objectMaker;
     private HealthBar healthBar;
+    private SceneController sceneController;
 
     public bool grounded;
     public LayerMask whatIsGround;
@@ -63,6 +64,9 @@ public class PlayerController : MonoBehaviour
     public bool Eagle;
     public LayerMask whatIsEagle;    
 
+    public bool finished;
+    public LayerMask whatIsfinished;    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
         atkObjectController = FindObjectOfType<AtkObjectController>();
         atkEagleController = FindObjectOfType<AtkEagleController>();
         healthBar = FindObjectOfType<HealthBar>();
+        sceneController = FindObjectOfType<SceneController>();
         
         this.transform.position = new Vector3(startPosition.transform.position.x, startPosition.transform.position.y + 1, startPosition.transform.position.z);
 
@@ -108,6 +113,7 @@ public class PlayerController : MonoBehaviour
         AtkBall = Physics2D.IsTouchingLayers(myCollider, whatIsAtkBall);
         EagleTrigger = Physics2D.IsTouchingLayers(myCollider, whatIsEagleTrigger);
         Eagle = Physics2D.IsTouchingLayers(myCollider, whatIsEagle);
+        finished = Physics2D.IsTouchingLayers(myCollider, whatIsfinished);
 
         // if(grounded && movementKind == 0)
         // {
@@ -211,6 +217,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(finished)
+        {
+            sceneController.LevelToNext();
+        }
 
 
     }

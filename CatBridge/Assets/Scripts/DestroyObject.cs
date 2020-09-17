@@ -10,6 +10,7 @@ public class DestroyObject : MonoBehaviour
     public LayerMask whatIsPlayer;
 
     private Collider2D myCollider;
+    public float destroytimer;
 
     void Start()
     {
@@ -21,9 +22,17 @@ public class DestroyObject : MonoBehaviour
         playered = Physics2D.IsTouchingLayers(myCollider, whatIsPlayer);
         if(playered)
         {
-            activated = true;
-            gameObject.SetActive(false);
-            
+            destroytimer = 0;
+            activated = true;            
+        }
+        if(activated)
+        {
+            destroytimer += Time.deltaTime;
+            if(destroytimer > 1)
+            {
+                gameObject.SetActive(false);
+                
+            }
         }
     }
 }
